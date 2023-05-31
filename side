@@ -1,0 +1,4 @@
+Get-ChildItem -Path "C:\Program Files\" -Filter *.exe -Recurse -File -Name| ForEach-Object {
+    $binarytoCheck = "C:\Program Files\" + $_
+    C:\Users\user\Desktop\Siofra64.exe --mode file-scan --enum-dependency --dll-hijack -f $binarytoCheck
+}
