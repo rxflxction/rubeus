@@ -1,0 +1,19 @@
+@echo off
+setlocal enabledelayedexpansion
+
+REM Read each line (IP) from the input file
+for /F "tokens=*" %%A in (ip_list.txt) do (
+    echo Checking IP: %%A
+
+    REM Try to list the shared resources on the IP
+    net view \\%%A 2>nul | findstr /C:"Shared resources at" >nul
+
+    REM Check if the previous command was successful (i.e., a share was found)
+    if !ERRORLEVEL! equ 0 (
+        echo Shared resources found at IP: %%A
+        net view \\%%A
+        echo.
+    ) else (
+        echo No shared resources found at IP: %%A
+    )
+)
